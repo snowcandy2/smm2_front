@@ -1,0 +1,175 @@
+<!DOCTYPE HTML>
+<html>
+   <head>
+       <!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+
+    <!-- 可选的 Bootstrap 主题文件（一般不用引入） -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap-theme.min.css" integrity="sha384-6pzBo3FDv/PJ8r2KRkGHifhEocL+1X2rVCTTkUfGk7/0pbek5mMa1upzvWbrUbOZ" crossorigin="anonymous">
+
+    <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous"></script>
+    <script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
+    <script src="/ws.js"></script>
+    <meta charset="utf-8">
+    <title>test</title>
+    <style>
+        #leftdown {
+            background: url("/350.jpg");
+            color: rgb(97, 97, 0);
+            padding: 13px; border-radius: 15px;
+            white-space: nowrap;
+            bottom: 8px; left: 8px; width: 38%; position: absolute; font-size: 30px; 
+            font-family: '方正准圆简体'; font-weight: 700;
+            overflow: hidden;
+        }
+        #deaths {
+            background: url("/350.jpg");
+            color: rgb(97, 97, 0);
+            padding-top: 13px; padding-left: 13px; border-radius: 15px;
+            bottom: 8px; right: 8px; width: 11%; position: absolute; font-size: 30px; 
+            font-family: '方正准圆简体'; font-weight: 700;
+            overflow: hidden; white-space: nowrap;
+        }
+        #righttop {
+            position: fixed;
+            right: 0; top: 0; margin: 5px;
+            color: white; 
+            font-weight: 600; 
+            font-size: 30px; 
+            text-shadow: 0 -6px 4px #32003C, /*上*/
+                            4px -4px 4px #32003C, /*右上*/
+                            6px 0 4px #32003C, /*右*/
+                            4px 4px 4px #32003C, /*右下*/
+                            0 6px 4px #32003C, /*下*/
+                            -4px 4px 4px #32003C, /*左下*/
+                            -6px 0 4px #32003C, /*左*/
+                            -4px -4px 4px #32003C; /*左上*/
+        }
+        #message {
+            position: fixed;
+            left: 210px;
+            bottom: 30px;
+            background: rgba(0, 0, 0, 0.7);
+            color: white; 
+            font-weight: 400; 
+            font-size: 28px; 
+        }
+        #wins {
+            text-shadow: 0 -6px 4px #009420, /*上*/
+                            4px -4px 4px #009420, /*右上*/
+                            6px 0 4px #009420, /*右*/
+                            4px 4px 4px #009420, /*右下*/
+                            0 6px 4px #009420, /*下*/
+                            -4px 4px 4px #009420, /*左下*/
+                            -6px 0 4px #009420, /*左*/
+                            -4px -4px 4px #009420; /*左上*/
+        }
+        #losses {
+            text-shadow: 0 -6px 4px #910000, /*上*/
+                            4px -4px 4px #910000, /*右上*/
+                            6px 0 4px #910000, /*右*/
+                            4px 4px 4px #910000, /*右下*/
+                            0 6px 4px #910000, /*下*/
+                            -4px 4px 4px #910000, /*左下*/
+                            -6px 0 4px #910000, /*左*/
+                            -4px -4px 4px #910000; /*左上*/
+        }
+        #win_rate {
+            text-shadow: 0 -6px 4px #c20071, /*上*/
+                            4px -4px 4px #c20071, /*右上*/
+                            6px 0 4px #c20071, /*右*/
+                            4px 4px 4px #c20071, /*右下*/
+                            0 6px 4px #c20071, /*下*/
+                            -4px 4px 4px #c20071, /*左下*/
+                            -6px 0 4px #c20071, /*左*/
+                            -4px -4px 4px #c20071; /*左上*/
+        }
+        #level_name {
+            font-family: '华康少女文字W5(P)';
+            padding-right: 8px;
+            color: white; 
+            font-weight: 800; 
+            font-size: 30px; 
+            text-shadow: 0 -6px 4px #32003C, /*上*/
+                            4px -4px 4px #32003C, /*右上*/
+                            6px 0 4px #32003C, /*右*/
+                            4px 4px 4px #32003C, /*右下*/
+                            0 6px 4px #32003C, /*下*/
+                            -4px 4px 4px #32003C, /*左下*/
+                            -6px 0 4px #32003C, /*左*/
+                            -4px -4px 4px #32003C; /*左上*/
+        }
+        #level_id {
+            padding-left: 8px;
+            color: white; 
+            font-weight: 700; 
+            font-size: 28px; 
+            text-shadow: 0 -6px 4px #004b3b, /*上*/
+                            4px -4px 4px #004b3b, /*右上*/
+                            6px 0 4px #004b3b, /*右*/
+                            4px 4px 4px #004b3b, /*右下*/
+                            0 6px 4px #004b3b, /*下*/
+                            -4px 4px 4px #004b3b, /*左下*/
+                            -6px 0 4px #004b3b, /*左*/
+                            -4px -4px 4px #004b3b; /*左上*/
+        }
+        #level_author {
+            padding-left: 8px;
+            color: white; 
+            font-weight: 700; 
+            font-size: 28px; 
+            text-shadow: 0 -6px 4px #be007f, /*上*/
+                            4px -4px 4px #be007f, /*右上*/
+                            6px 0 4px #be007f, /*右*/
+                            4px 4px 4px #be007f, /*右下*/
+                            0 6px 4px #be007f, /*下*/
+                            -4px 4px 4px #be007f, /*左下*/
+                            -6px 0 4px #be007f, /*左*/
+                            -4px -4px 4px #be007f; /*左上*/
+        }
+    </style>
+   </head>
+   <body>
+    <div id="lefttop" style="left: 0; top: 0;padding: 5px; position: absolute;">
+        <div id="level_info">
+            <span id="level_name"></span>
+            <span id="level_author"></span>
+            <span id="level_id"></span>
+        </div>
+        <p id="wsinfo"></p>
+    </div>
+    <div hidden id="righttop">
+        <p>
+            胜: <span id="wins">0</span>&nbsp;&nbsp;
+            负: <span id="losses">0</span>&nbsp;&nbsp;
+            胜率: <span id="win_rate">0</span>
+        </p>
+    </div>
+    <div hidden id="leftdown">
+        <p>
+            赞: <span id="likes" style="color: red"></span>&nbsp;&nbsp;孬: <span id="boos" style="color: blue"></span>&nbsp;&nbsp;
+            通关率: <span id="clear_rate" style="color: black"></span> (<span id="clears">0</span> / <span id="attempts"></span>)&nbsp;&nbsp;
+            玩：<span id="plays" style="color: black">0</span>
+        </p>
+        <p>
+            作者通关: <span id="cleartime" style="color: black"></span>&nbsp;&nbsp;WR: <span id="world_record" style="color: rgb(101, 0, 216)">0:00.00</span>
+            &nbsp;by <span id="wr" style="color:rgb(101, 0, 216)">raincandy</span>
+        </p>
+        <p>
+            关卡难度: <span id="difficulty">Super Expert</span>&nbsp;&nbsp;
+            对战次数: <span id="versus_matches">0</span>&nbsp;&nbsp;
+            合作次数: <span id="coop_matches">0</span>
+        </p>
+    </div>
+    <div hidden id="message">
+        <p id="mcontent"></p>
+    </div>
+    <div hidden id="deaths">
+        <p>
+            Death: <span id="death_cnt" style="color:rgb(101, 0, 216)">0</span>
+        </p>
+    </div>
+      
+   </body>
+</html>
